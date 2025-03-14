@@ -20,7 +20,7 @@ body {
     border-radius: 10px;
     width: 80%;
     max-width: 500px;
-    box-shadow: 0 0 20px rgba(219, 172, 52, 0.8);
+    box-shadow: 0 0 20px rgba( 255, 215, 0, 0.8);
 }
 
 /* Titel */
@@ -43,7 +43,7 @@ h1 {
     color: white;
     background: linear-gradient(45deg, #0047ab, #00bfff);
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
+    box-shadow: 0 0 10px rgba(219, 172, 52, 0.7);
     transition: 0.3s ease-in-out;
 }
 
