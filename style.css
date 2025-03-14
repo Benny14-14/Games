@@ -3,7 +3,7 @@ body {
     font-family: 'Cinzel', serif;
     margin: 0;
     padding: 0;
-    background: url('https://benny14-14.github.io/Games/Gamesbackground2.jpg') no-repeat center center fixed;
+    background: url('https://benny14-14.github.io/Games/Gamesbackground.jpg') no-repeat center center fixed;
     background-size: cover;
     color: white;
     text-align: center;
@@ -20,13 +20,13 @@ body {
     border-radius: 10px;
     width: 80%;
     max-width: 500px;
-    box-shadow: 0 0 20px rgba(0, 215, 255, 0.8);
+    box-shadow: 0 0 20px rgba(136, 0, 255, 0.8);
 }
 
 /* Titel */
 h1 {
     font-size: 2.5em;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
+    text-shadow: 0 0 10px rgba(255, 125, 50, 0.9);
 }
 
 /* Buttons */
@@ -41,9 +41,9 @@ h1 {
     text-decoration: none;
     font-size: 1.2em;
     color: white;
-    background: linear-gradient(45deg, #0047ab, #00bfff);
+    background: linear-gradient(25deg, #7758B3, #8A5A83);
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
+    box-shadow: 0 0 10px rgba(136, 0, 255, 0.7);
     transition: 0.3s ease-in-out;
 }
 
