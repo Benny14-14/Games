@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="https://benny14-14.github.io/Games/dnd/dndstyle.css">
 </head>
 <body>
-
     <div class="container">
         <h1>Login</h1>
         
+        <form id="loginForm">
+            <input type="text" id="button2" placeholder="Benutzername" required>
+            <input type="password" id="button3" placeholder="Passwort" required>
+            <button type="submit">Login</button>
+        </form>
+
         <div class="buttons">
             <a href="https://benny14-14.github.io/Games/dnd/" class="btn">Return</a>
             <a href="https://benny14-14.github.io/Games/dnd/latest/index.html" class="btn">Button2</a>
@@ -18,5 +23,24 @@
         </div>
     </div>
 
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let username = document.getElementById("button2").value;
+            let password = document.getElementById("button3").value;
+            
+            fetch("accounts.js")
+                .then(response => response.json())
+                .then(accounts => {
+                    if (accounts[username] && accounts[username].password === password) {
+                        window.location.href = accounts[username].redirect;
+                    } else {
+                        alert("Falscher Benutzername oder falsches Passwort");
+                    }
+                })
+                .catch(error => console.error("Fehler beim Laden der Accounts: ", error));
+        });
+    </script>
 </body>
 </html>
