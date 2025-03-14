@@ -20,7 +20,7 @@ body {
     border-radius: 10px;
     width: 80%;
     max-width: 500px;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    box-shadow: 0 0 20px rgba(0, 215, 255, 0.8);
 }
 
 /* Titel */
