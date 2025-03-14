@@ -26,7 +26,7 @@ body {
 /* Titel */
 h1 {
     font-size: 2.5em;
-    text-shadow: 0 0 10px #ff9700;
+    text-shadow: 0 0 10px rgba(255, 125, 50, 0.9);
 }
 
 /* Buttons */
