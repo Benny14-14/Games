@@ -22,16 +22,16 @@
     </div>
     
 <script>
-    // Überprüft, ob der Benutzer eingeloggt ist
+    // Überprüfung beim Laden der Seite
     function checkLogin() {
-        const loggedIn = sessionStorage.getItem("loggedIn"); // Oder localStorage
-        if (!loggedIn) {
-            window.location.href = "https://benny14-14.github.io/Games/dnd/latest/login.html"; // Weiterleitung zur Login-Seite
+        if (!sessionStorage.getItem("loggedIn")) {
+            window.location.href = "https://benny14-14.github.io/Games/dnd/latest/login.html";
         }
     }
 
-    checkLogin(); // Beim Laden der Seite prüfen
+    checkLogin();
 </script>
+
     
     <script>
     async function updateHP() {
