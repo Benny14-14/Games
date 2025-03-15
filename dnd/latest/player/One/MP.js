@@ -39,3 +39,4 @@ document.getElementById("update-btn").addEventListener("click", updateMP);
 
 // Initiales Laden der HP-Daten
 updateMP();
+
