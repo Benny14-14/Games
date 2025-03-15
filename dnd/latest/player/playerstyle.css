@@ -63,14 +63,14 @@ h1 {
     margin: 20px auto;
     overflow: hidden;
     position: relative;
+    border: 2px solid white;
 }
 
-#hp-bar {
+#hp-bar {  /* Hier war der Fehler! */
     height: 100%;
     background: linear-gradient(45deg, red, darkred);
     width: 100%;
     transition: width 0.5s ease-in-out;
-    border-radius: 10px;
 }
 
 .hp-text {
