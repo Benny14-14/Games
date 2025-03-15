@@ -35,7 +35,7 @@ async function updateHP() {
 }
 
 // Button-Klick für HP-Update
-document.getElementById("update-hp-btn").addEventListener("click", updateHP);
+document.getElementById("update-btn").addEventListener("click", updateHP);
 
 // Initiales Laden der HP-Daten
 updateHP();
