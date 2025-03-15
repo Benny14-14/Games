@@ -65,8 +65,8 @@ h1 {
     transform: scale(1.2);
 }
 
-/* HP Balken Styling */
-.hp-container {
+/* Balken-Styling für HP, MP und EP */
+.bar-container {
     width: 80%;
     max-width: 400px;
     background-color: gray;
@@ -78,14 +78,46 @@ h1 {
     border: 2px solid white;
 }
 
-#hp-bar {  /* Hier war der Fehler! */
+/* HP Balken */
+#hp-bar {
     height: 100%;
     background: linear-gradient(45deg, red, darkred);
     width: 100%;
     transition: width 0.5s ease-in-out;
 }
-
 .hp-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+/* MP Balken */
+#mp-bar {
+    height: 100%;
+    background: linear-gradient(45deg, blue, darkblue);
+    width: 100%;
+    transition: width 0.5s ease-in-out;
+}
+.mp-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+/* EP Balken */
+#ep-bar {
+    height: 100%;
+    background: linear-gradient(45deg, gold, darkgoldenrod);
+    width: 100%;
+    transition: width 0.5s ease-in-out;
+}
+.ep-text {
     position: absolute;
     width: 100%;
     text-align: center;
