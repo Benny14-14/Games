@@ -12,6 +12,7 @@
         <div class="buttons">
             <a href="https://benny14-14.github.io/Games/dnd/latest/login.html" class="btn">Log-Out</a>
         </div>
+        <button id="update-hp-btn" class="btn">Reload</button>
     </div>
 
     <h1 style="text-align: center;">HP-Anzeige</h1>
@@ -39,39 +40,47 @@
     
     <script>
     async function updateHP() {
-        const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMg-ZrR1dmJeFH5wGwj_mNDrHCzDc8kw-FEyO1deuV7v9UFzdpQnq5a2c9s5EkEjWJrexa6mwDzGXY/pub?gid=0&single=true&output=csv";
-        
-        try {
-            let response = await fetch(sheetUrl);
-            let text = await response.text();
-            let rows = text.split("\n");
+    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMg-ZrR1dmJeFH5wGwj_mNDrHCzDc8kw-FEyO1deuV7v9UFzdpQnq5a2c9s5EkEjWJrexa6mwDzGXY/pub?gid=0&single=true&output=csv";
+    
+    try {
+        let response = await fetch(sheetUrl, { cache: "no-store" });
+        let text = await response.text();
+        let rows = text.trim().split("\n");
 
-            console.log("Google Sheets Daten:", rows); // Debugging
+        if (rows.length < 2) {
+            console.error("Fehler: Nicht genügend Datenzeilen in der Tabelle.");
+            return;
+        }
 
-            if (rows.length < 2) {
-                console.error("Fehler: Keine Daten gefunden.");
-                return;
-            }
+        let hpData = rows[1].split(",");
 
-            let hpData = rows[1].split(","); // Annahme: HP-Werte in Zeile 2
-            console.log("HP-Daten:", hpData); // Debugging
+        if (hpData.length < 2) {
+            console.error("Fehler: Keine gültigen HP-Werte gefunden.");
+            return;
+        }
 
-            let currentHP = parseInt(hpData[0], 10);
-            let maxHP = parseInt(hpData[1], 10);
+        let currentHP = parseInt(hpData[0].trim());
+        let maxHP = parseInt(hpData[1].trim());
 
-            if (isNaN(currentHP) || isNaN(maxHP) || maxHP <= 0) {
-                console.error("Fehler: Ungültige HP-Werte:", { currentHP, maxHP });
-                return;
-            }
-
-            let hpPercentage = (currentHP / maxHP) * 100;
+        if (!isNaN(currentHP) && !isNaN(maxHP) && maxHP > 0) {
+            let hpPercentage = Math.max(0, Math.min(100, (currentHP / maxHP) * 100));
             document.getElementById("hp-bar").style.width = hpPercentage + "%";
             document.getElementById("hp-text").textContent = `${currentHP} / ${maxHP} HP`;
-
-        } catch (error) {
-            console.error("Fehler beim Laden der HP-Daten:", error);
+        } else {
+            console.error("Fehler: Ungültige HP-Werte.");
         }
+
+    } catch (error) {
+        console.error("Fehler beim Laden der HP-Daten:", error);
     }
+}
+
+// Button-Klick für HP-Update
+document.getElementById("update-hp-btn").addEventListener("click", updateHP);
+
+// Initiales Laden der HP-Daten
+updateHP();
+
 </script>
 
 
