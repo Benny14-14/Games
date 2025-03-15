@@ -1,0 +1,80 @@
+/* HP Balken Styling */
+.hp-container {
+    width: 80%;
+    max-width: 400px;
+    background-color: gray;
+    border-radius: 10px;
+    height: 30px;
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+}
+#hp-bar {
+    height: 100%;
+    background: linear-gradient(45deg, red, darkred);
+    width: 100%;
+    transition: width 0.5s ease-in-out;
+}
+.hp-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Allgemeine Styles */
+body {
+    font-family: 'Cinzel', serif;
+    margin: 0;
+    padding: 0;
+    background: url('https://benny14-14.github.io/Games/dnd/background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: orange;
+    text-align: center;
+}
+
+/* Container */
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+/* Titel */
+h1 {
+    font-size: 2.5em;
+    text-shadow: 0 0 10px rgba(255, 125, 50, 0.9);
+}
+
+/* Buttons */
+.buttons {
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: white;
+    background: linear-gradient(25deg, #ff4700, #ff9700);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(rgba(119, 172, 52, 0.7);
+    transition: 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background: linear-gradient(25deg, #ffF700, #fA9700);
+    box-shadow: 0 0 20px rgba(173, 216, 230, 0.9);
+    transform: scale(1.2);
+}
