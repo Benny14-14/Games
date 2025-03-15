@@ -20,7 +20,19 @@
         <div id="hp-bar"></div>
         <div class="hp-text" id="hp-text">Lädt...</div>
     </div>
+    
+<script>
+    // Überprüft, ob der Benutzer eingeloggt ist
+    function checkLogin() {
+        const loggedIn = sessionStorage.getItem("loggedIn"); // Oder localStorage
+        if (!loggedIn) {
+            window.location.href = "https://benny14-14.github.io/Games/dnd/latest/login.html"; // Weiterleitung zur Login-Seite
+        }
+    }
 
+    checkLogin(); // Beim Laden der Seite prüfen
+</script>
+    
     <script>
         async function updateHP() {
             const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMg-ZrR1dmJeFH5wGwj_mNDrHCzDc8kw-FEyO1deuV7v9UFzdpQnq5a2c9s5EkEjWJrexa6mwDzGXY/pub?gid=0&single=true&output=csv";
