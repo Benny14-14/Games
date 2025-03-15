@@ -11,3 +11,4 @@
     "Benutzer9": { "password": "passwort9", "redirect": "https://benny14-14.github.io/Games/dnd/latest/player/Nine/spieler9.html" },
     "Benutzer10": { "password": "passwort10", "redirect": "https://benny14-14.github.io/Games/dnd/latest/player/Ten/spieler10.html" }
 }
+
