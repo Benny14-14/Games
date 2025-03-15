@@ -42,5 +42,13 @@
                 .catch(error => console.error("Fehler beim Laden der Accounts: ", error));
         });
     </script>
+    <script>
+    function login() {
+        // Hier deine Login-Überprüfung einfügen (z. B. Passwort checken)
+        // Falls der Login erfolgreich ist:
+        sessionStorage.setItem("loggedIn", "true");
+        window.location.href = "https://benny14-14.github.io/Games/dnd/latest/player.html"; // Weiterleitung zur Spieler-Seite
+    }
+</script>
 </body>
 </html>
