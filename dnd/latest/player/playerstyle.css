@@ -22,6 +22,18 @@ body {
     max-width: 150px;
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
 }
+.statcontainer {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
 
 /* Titel */
 h1 {
