@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HP-Anzeige | D&D</title>
+    <style>
+        /* HP Balken Styling */
+        .hp-container {
+            width: 80%;
+            max-width: 400px;
+            background-color: gray;
+            border-radius: 10px;
+            height: 30px;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        #hp-bar {
+            height: 100%;
+            background: linear-gradient(45deg, red, darkred);
+            width: 100%;
+            transition: width 0.5s ease-in-out;
+        }
+        .hp-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
 
+    <h1 style="text-align: center;">HP-Anzeige</h1>
+    <div class="hp-container">
+        <div id="hp-bar"></div>
+        <div class="hp-text" id="hp-text">100 / 100 HP</div>
+    </div>
+
+    <script>
+        async function updateHP() {
+            const sheetUrl = "https://docs.google.com/spreadsheets/d/e/DEINE_SHEET_ID/pub?output=csv";
+            
+            try {
+                let response = await fetch(sheetUrl);
+                let text = await response.text();
+                let rows = text.split("\n");
+                let hpData = rows[1].split(","); // Annahme: HP ist in der 2. Zeile gespeichert
+                
+                let currentHP = parseInt(hpData[0]); // Spalte mit aktueller HP
+                let maxHP = parseInt(hpData[1]); // Spalte mit max HP
+                
+                let hpPercentage = (currentHP / maxHP) * 100;
+                document.getElementById("hp-bar").style.width = hpPercentage + "%";
+                document.getElementById("hp-text").textContent = `${currentHP} / ${maxHP} HP`;
+            } catch (error) {
+                console.error("Fehler beim Laden der HP-Daten:", error);
+            }
+        }
+
+        updateHP();
+        setInterval(updateHP, 5000); // Alle 5 Sekunden aktualisieren
+    </script>
+
+</body>
+</html>
