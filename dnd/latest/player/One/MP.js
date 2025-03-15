@@ -13,7 +13,7 @@ async function updateMP() {
 
         let mpData = rows[1].split(",");
 
-        if (hpData.length < 2) {
+        if (mpData.length < 2) {
             console.error("Fehler: Keine gültigen MP-Werte gefunden.");
             return;
         }
