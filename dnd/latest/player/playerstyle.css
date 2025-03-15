@@ -43,7 +43,7 @@ h1 {
     color: white;
     background: linear-gradient(25deg, #ff4700, #ff9700);
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(rgba(119, 172, 52, 0.7);
+    box-shadow: 0 0 10px rgba(119, 172, 52, 0.7);
     transition: 0.3s ease-in-out;
 }
 
@@ -65,11 +65,12 @@ h1 {
     position: relative;
 }
 
-hp-bar {
+#hp-bar {
     height: 100%;
     background: linear-gradient(45deg, red, darkred);
     width: 100%;
     transition: width 0.5s ease-in-out;
+    border-radius: 10px;
 }
 
 .hp-text {
