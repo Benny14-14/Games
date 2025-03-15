@@ -5,7 +5,7 @@ body {
     padding: 0;
     background: url('https://benny14-14.github.io/Games/dnd/background.jpeg') no-repeat center center fixed;
     background-size: cover;
-    color: orange;
+    color: white;
     text-align: center;
 }
 
@@ -18,7 +18,7 @@ body {
     background: rgba(0, 0, 0, 0.7);
     padding: 0px;
     border-radius: 10px;
-    width: 120px;
+    width: 140px;
     max-width: 150px;
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
 }
