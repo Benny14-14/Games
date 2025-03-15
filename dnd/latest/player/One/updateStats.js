@@ -18,13 +18,9 @@ async function updateStats() {
             return;
         }
 
-        // HP
+        // Balken aktualisieren
         updateBar("hp-bar", "hp-text", parseInt(data[0]), parseInt(data[1]), "HP");
-
-        // MP
         updateBar("mp-bar", "mp-text", parseInt(data[3]), parseInt(data[4]), "MP");
-
-        // EP
         updateBar("ep-bar", "ep-text", parseInt(data[6]), parseInt(data[7]), "EP");
 
     } catch (error) {
@@ -32,7 +28,7 @@ async function updateStats() {
     }
 }
 
-// Funktion zum Updaten der Balken
+// Universelle Funktion für alle Balken
 function updateBar(barId, textId, current, max, label) {
     if (!isNaN(current) && !isNaN(max) && max > 0) {
         let percentage = Math.max(0, Math.min(100, (current / max) * 100));
@@ -43,8 +39,8 @@ function updateBar(barId, textId, current, max, label) {
     }
 }
 
-// Button-Klick zum Aktualisieren
+// Button zum Neuladen
 document.getElementById("update-btn").addEventListener("click", updateStats);
 
-// Initiales Laden der Daten
+// Initialer Aufruf
 updateStats();
