@@ -12,14 +12,14 @@ body {
 /* Container */
 .container {
     position: absolute;
-    top: 50%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.7);
-    padding: 30px;
+    padding: 0px;
     border-radius: 10px;
-    width: 80%;
-    max-width: 500px;
+    width: 120px;
+    max-width: 150px;
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
 }
 
@@ -31,7 +31,7 @@ h1 {
 
 /* Buttons */
 .buttons {
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .btn {
