@@ -9,11 +9,8 @@
 <body>
     
     <div class="container">
-        <h1>Dungeon and Dragons</h1>
-        
         <div class="buttons">
             <a href="https://benny14-14.github.io/Games/dnd/" class="btn">Return</a>
-            <a href="https://benny14-14.github.io/Games/dnd/latest/login.html" class="btn">Login</a>
             <a href="https://benny14-14.github.io/Games/dnd/history/index.html" class="btn">other</a>
         </div>
     </div>
@@ -26,7 +23,7 @@
 
     <script>
         async function updateHP() {
-            const sheetUrl = "https://docs.google.com/spreadsheets/d/e/DEINE_SHEET_ID/pub?output=csv";
+            const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMg-ZrR1dmJeFH5wGwj_mNDrHCzDc8kw-FEyO1deuV7v9UFzdpQnq5a2c9s5EkEjWJrexa6mwDzGXY/pub?gid=0&single=true&output=csv";
             
             try {
                 let response = await fetch(sheetUrl);
