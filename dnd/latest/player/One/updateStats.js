@@ -50,7 +50,11 @@ function updateBar(barId, textId, current, max, label) {
 }
 
 // Button-Klick-Event hinzufügen
-document.getElementById("update-btn").addEventListener("click", updateStats);
+document.getElementById("update-btn").addEventListener("click", function() {
+    updateHP();
+    updateMP();
+    updateEP();
+});
 
 // Initiales Laden der Werte
 updateStats();
