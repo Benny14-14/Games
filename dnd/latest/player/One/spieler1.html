@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spieler 1 | D&D</title>
+    <link rel="stylesheet" href="https://benny14-14.github.io/Games/dnd/latest/player/playerstyle.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="buttons">
+            <a href="https://benny14-14.github.io/Games/dnd/latest/login.html" class="btn">Log-Out</a>
+        </div>
+        <button id="update-hp-btn" class="btn">Reload</button>
+    </div>
+
+    <h1 style="text-align: center;">HP-Anzeige</h1>
+
+    <div class="hp-container">
+        <div id="hp-bar"></div>
+        <div class="hp-text" id="hp-text">Lädt...</div>
+    </div>
+    
+<!-- 
+    
+    <script> 
+    // Überprüfung beim Laden der Seite
+    function checkLogin() {
+        if (!sessionStorage.getItem("loggedIn")) {
+            window.location.href = "https://benny14-14.github.io/Games/dnd/latest/login.html";
+        }
+    }
+
+    checkLogin(); 
+</script> 
+    
+    -->
+
+    
+    <script src="https://benny14-14.github.io/Games/dnd/latest/player/One/HP.js"></script>
+
+
+</body>
+</html>
