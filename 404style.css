@@ -13,8 +13,8 @@ body {
     position: absolute;
     top: 20%;
     left: 20%;
-    width: 100vw;
-    height: 100vh;
+    width: 96%;
+    height: 80%;
 }
 
 .video-container iframe {
@@ -28,15 +28,15 @@ body {
 /* Container */
 .container {
     position: absolute;
-    top: 20%;
-    left: 20%;
-    transform: translate(-50%, -50%);
+    top: 10%;
+    left: 10%;
     background: rgba(0, 0, 0, 0.7);
     padding: 30px;
     border-radius: 10px;
     width: 80%;
-    max-width: 1500px;
+    max-width: 80%px;
     box-shadow: 0 0 20px rgba(136, 0, 255, 0.8);
+    height: 80%;
 }
 
 /* Titel */
