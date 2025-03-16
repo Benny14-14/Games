@@ -43,7 +43,7 @@ h1 {
 
 .inventory-container {
     position: fixed;
-    top: 50%;
+    top: 10%;
     right: 5%;
     transform: translateY(-50%);
     width: 30%;
