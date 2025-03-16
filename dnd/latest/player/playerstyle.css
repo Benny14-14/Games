@@ -70,7 +70,7 @@ h1 {
 /* Statusanzeige Box links oben */
 .status-container {
     position: fixed;
-    top: 5%;
+    top: 10%;
     left: 5%;
     width: 35%;
     max-width: 500px;
