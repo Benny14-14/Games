@@ -72,7 +72,8 @@ h1 {
     position: fixed;
     top: 5%;
     left: 5%;
-    width: 300px;
+    width: 35%;
+    height: 50%;
     background: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     padding: 10px;
@@ -89,8 +90,8 @@ h1 {
 
 /* Die Box für das Iframe */
 .status-box {
-    width: 100%;
-    height: 200px;
+    width: 97%;
+    height: 80%;
     background: rgba(50, 50, 50, 0.9);
     border-radius: 5px;
     padding: 5px;
