@@ -10,24 +10,24 @@
 
     <div class="container">
         <h1>Error Page</h1>
+        
     <div class="buttons">
-    <a href="javascript:history.back()" class="btn">Return</a>
-    <a href="https://benny14-14.github.io/Games/" class="btn">Games</a>
+        <a href="javascript:history.back()" class="btn">Return</a>
+        <a href="https://benny14-14.github.io/Games/" class="btn">Games</a>
     </div>
 
-        <div class="video-container">
-   <iframe 
-    id="videoFrame"
-    width="100%" 
-    height="100%" 
-    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" 
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" 
-    allowfullscreen>
-</iframe>
-
+    <div class="video-container">
+       <iframe 
+           width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=0&modestbranding=1&showinfo=0&disablekb=1" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen 
+            onload="preventPause(event)">
+    </iframe> 
 <script>
     window.onload = function() {
         var iframe = document.getElementById("videoFrame");
@@ -35,9 +35,20 @@
         iframe.src = videoSrc + "&autoplay=1";
     };
 </script>
-
-</div>       
+        
+<script>
+    // Überwacht das Video und spielt es weiter, falls es pausiert wird
+    function preventPause(event) {
+        let video = event.target;
+        setInterval(() => {
+            if (video.paused) {
+                video.play();
+            }
+        }, 500); // Überprüft alle 500ms, ob das Video pausiert wurde
+    }
+</script>
+        </div>       
     </div>
-
+    
 </body>
 </html>
