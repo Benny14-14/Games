@@ -45,7 +45,7 @@ h1 {
     position: fixed;
     top: 10%;
     right: 5%;
-    transform: translateY(-50%);
+   /* transform: translateY(-50%);*/
     width: 30%;
     height: 65vh; /* Höhe abhängig vom Viewport */
     background: rgba(0, 0, 0, 0.7);
