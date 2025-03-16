@@ -11,44 +11,49 @@
     <div class="container">
         <h1>Error Page</h1>
         
-    <div class="buttons">
-        <a href="javascript:history.back()" class="btn">Return</a>
-        <a href="https://benny14-14.github.io/Games/" class="btn">Games</a>
-    </div>
+        <div class="buttons">
+            <a href="javascript:history.back()" class="btn">Return</a>
+            <a href="https://benny14-14.github.io/Games/" class="btn">Games</a>
+        </div>
 
-    <div class="video-container">
-       <iframe 
-           width="560" 
-            height="315" 
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=0&modestbranding=1&showinfo=0&disablekb=1" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            allowfullscreen 
-            onload="preventPause(event)">
-    </iframe> 
-<script>
-    window.onload = function() {
-        var iframe = document.getElementById("videoFrame");
-        var videoSrc = iframe.src;
-        iframe.src = videoSrc + "&autoplay=1";
-    };
-</script>
-        
-<script>
-    // Überwacht das Video und spielt es weiter, falls es pausiert wird
-    function preventPause(event) {
-        let video = event.target;
-        setInterval(() => {
-            if (video.paused) {
-                video.play();
-            }
-        }, 500); // Überprüft alle 500ms, ob das Video pausiert wurde
-    }
-</script>
+        <div class="video-container">
+            <iframe 
+                id="youtube-video"
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1&mute=0&controls=0&modestbranding=1&showinfo=0&disablekb=1" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+            </iframe>
         </div>       
     </div>
-    
+
+    <script>
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-video', {
+                events: {
+                    'onStateChange': function(event) {
+                        // Wenn das Video endet, leite zur Games-Seite weiter
+                        if (event.data === YT.PlayerState.ENDED) {
+                            window.location.href = "https://benny14-14.github.io/Games/";
+                        }
+                        // Wenn das Video pausiert wird, spiele es sofort weiter
+                        if (event.data === YT.PlayerState.PAUSED) {
+                            player.playVideo();
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+    <!-- Lade die YouTube API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
 </body>
 </html>
