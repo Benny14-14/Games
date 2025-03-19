@@ -30,6 +30,7 @@
         const boxSize = 20;
         let snake = [{ x: 200, y: 200 }];
         let direction = "RIGHT";
+        let nextDirection = "RIGHT"; // Zwischenspeicher für flüssige Steuerung
         let food = spawnFood();
         let score = 0;
 
@@ -37,10 +38,10 @@
 
         function changeDirection(event) {
             const key = event.keyCode;
-            if (key === 37 && direction !== "RIGHT") direction = "LEFT";
-            else if (key === 38 && direction !== "DOWN") direction = "UP";
-            else if (key === 39 && direction !== "LEFT") direction = "RIGHT";
-            else if (key === 40 && direction !== "UP") direction = "DOWN";
+            if (key === 37 && direction !== "RIGHT") nextDirection = "LEFT";
+            else if (key === 38 && direction !== "DOWN") nextDirection = "UP";
+            else if (key === 39 && direction !== "LEFT") nextDirection = "RIGHT";
+            else if (key === 40 && direction !== "UP") nextDirection = "DOWN";
         }
 
         function spawnFood() {
@@ -62,6 +63,8 @@
                 ctx.fillRect(segment.x, segment.y, boxSize, boxSize);
             });
 
+            direction = nextDirection; // Aktualisiere Richtung erst am Anfang jedes Frames
+
             let head = { x: snake[0].x, y: snake[0].y };
 
             if (direction === "LEFT") head.x -= boxSize;
@@ -69,11 +72,22 @@
             if (direction === "UP") head.y -= boxSize;
             if (direction === "DOWN") head.y += boxSize;
 
-            // **Teleport durch die Wände**
-            if (head.x < 0) head.x = canvas.width - boxSize; // Links raus → Rechts rein
-            if (head.x >= canvas.width) head.x = 0; // Rechts raus → Links rein
-            if (head.y < 0) head.y = canvas.height - boxSize; // Oben raus → Unten rein
-            if (head.y >= canvas.height) head.y = 0; // Unten raus → Oben rein
+            // **Teleport durch Wände**
+            if (head.x < 0) head.x = canvas.width - boxSize;
+            if (head.x >= canvas.width) head.x = 0;
+            if (head.y < 0) head.y = canvas.height - boxSize;
+            if (head.y >= canvas.height) head.y = 0;
+
+            // **Erst prüfen, wenn der Kopf sich bewegt hat**
+            if (snake.some((segment, index) => index !== 0 && segment.x === head.x && segment.y === head.y)) {
+                alert("Game Over! Score: " + score);
+                snake = [{ x: 200, y: 200 }];
+                direction = "RIGHT";
+                nextDirection = "RIGHT";
+                food = spawnFood();
+                score = 0;
+                return;
+            }
 
             if (head.x === food.x && head.y === food.y) {
                 food = spawnFood();
@@ -82,18 +96,10 @@
                 snake.pop();
             }
 
-            if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
-                alert("Game Over! Score: " + score);
-                snake = [{ x: 200, y: 200 }];
-                direction = "RIGHT";
-                food = spawnFood();
-                score = 0;
-            }
-
             snake.unshift(head);
         }
 
-        setInterval(draw, 150); // **Langsamere Geschwindigkeit**
+        setInterval(draw, 150);
     </script>
 </body>
 </html>
