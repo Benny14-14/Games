@@ -27,7 +27,7 @@ function updateGame() {
         case "right": head.x++; break;
     }
 
-    // Rand überschreiten -> Teleport auf die andere Seite
+    // Rand-Teleportation
     if (head.x < 0) head.x = canvas.width / gridSize - 1;
     if (head.x >= canvas.width / gridSize) head.x = 0;
     if (head.y < 0) head.y = canvas.height / gridSize - 1;
@@ -50,4 +50,12 @@ function updateGame() {
     }
 
     drawGame();
+}
+
+function resetGame() {
+    alert("Game Over!");
+    snake = [{ x: 10, y: 10 }];
+    direction = "right";
+    score = 0;
+    updateScore();
 }
