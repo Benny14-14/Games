@@ -15,37 +15,41 @@ canvas {
 .score-container {
     font-size: 18px;
     margin-bottom: 10px;
-}
-
-.controls {
-    position: fixed;
-    bottom: 20px;
-    display: grid;
-    grid-template-columns: 50px 50px 50px;
-    grid-template-rows: 50px 50px;
-    gap: 5px;
-}
-
-.controls.left { left: 20px; }
-.controls.right { right: 20px; }
-
-.btn {
-    width: 50px;
-    height: 50px;
-    background-color: gray;
     color: white;
-    font-size: 20px;
-    border: none;
-    border-radius: 10px;
+}
+
+.slider-container {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+#speedSlider {
+    width: 150px;
+    height: 10px;
+    appearance: none;
+    border-radius: 5px;
+    background: yellow;
+    outline: none;
+}
+
+#speedSlider::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: black;
     cursor: pointer;
 }
 
-.btn:active { background-color: darkgray; }
-
-.btn-up { grid-column: 2; grid-row: 1; }
-.btn-left { grid-column: 1; grid-row: 2; }
-.btn-right { grid-column: 3; grid-row: 2; }
-.btn-down { grid-column: 2; grid-row: 2; }
+#speedLabel {
+    font-weight: bold;
+    margin-bottom: 10px;
+    transform: rotate(90deg);
+}
 
 .return-btn {
     position: fixed;
@@ -59,61 +63,4 @@ canvas {
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(136, 0, 255, 0.7);
 }
-
-.return-btn:hover { background: linear-gradient(45deg, #00bfff, #0047ab); }
-
-
-.slider-container {
-    position: absolute;
-    left: 20px;  /* Abstand vom linken Rand */
-    top: 50%;
-    transform: translateY(-50%) rotate(-90deg); /* Dreht den Slider */
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-}
-
-#speedSlider {
-    width: 150px; /* Breite wird zur Höhe (wegen Rotation) */
-    height: 10px;
-    -webkit-appearance: none;
-    appearance: none;
-    border-radius: 5px;
-    background: yellow; /* Startwert */
-    outline: none;
-    transition: background 0.3s;
-}
-
-#speedSlider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: black;
-    cursor: pointer;
-}
-
-#speedLabel {
-    font-weight: bold;
-    margin-bottom: 10px;
-    transform: rotate(90deg); /* Dreht den Text zurück */
-}
-
-.score-container {
-    position: absolute;
-    left: 20px;
-    top: 20%;
-    transform: translateY(-50%);
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: left;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
