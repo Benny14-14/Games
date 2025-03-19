@@ -17,11 +17,66 @@
             margin: 20px auto;
             border: 2px solid white;
         }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(25deg, #7758B3, #8A5A83);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(136, 0, 255, 0.7);
+            text-decoration: none;
+            transition: 0.3s ease-in-out;
+        }
+        .btn:hover {
+            background: linear-gradient(45deg, #00bfff, #0047ab);
+            box-shadow: 0 0 20px rgba(173, 216, 230, 0.9);
+            transform: scale(1.1);
+        }
+
+        /* Steuerungs-Buttons */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .control-btn {
+            width: 60px;
+            height: 60px;
+            font-size: 2em;
+            text-align: center;
+            line-height: 60px;
+            background: linear-gradient(25deg, #7758B3, #8A5A83);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(136, 0, 255, 0.7);
+            color: white;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .control-btn:hover {
+            background: linear-gradient(45deg, #00bfff, #0047ab);
+            box-shadow: 0 0 20px rgba(173, 216, 230, 0.9);
+        }
     </style>
 </head>
 <body>
     <h1>Snake Game</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <!-- Return-Button -->
+    <a href="javascript:history.back()" class="btn">Return</a>
+
+    <!-- Steuerung für Touch-Geräte -->
+    <div class="controls">
+        <div class="control-btn" onclick="changeDirection('LEFT')">⬅️</div>
+        <div class="control-btn" onclick="changeDirection('RIGHT')">➡️</div>
+    </div>
 
     <script>
         const canvas = document.getElementById("gameCanvas");
@@ -30,18 +85,22 @@
         const boxSize = 20;
         let snake = [{ x: 200, y: 200 }];
         let direction = "RIGHT";
-        let nextDirection = "RIGHT"; // Zwischenspeicher für flüssige Steuerung
+        let nextDirection = "RIGHT";
         let food = spawnFood();
         let score = 0;
 
-        document.addEventListener("keydown", changeDirection);
+        document.addEventListener("keydown", (event) => {
+            if (event.keyCode === 37) changeDirection("LEFT");
+            if (event.keyCode === 39) changeDirection("RIGHT");
+            if (event.keyCode === 38) changeDirection("UP");
+            if (event.keyCode === 40) changeDirection("DOWN");
+        });
 
-        function changeDirection(event) {
-            const key = event.keyCode;
-            if (key === 37 && direction !== "RIGHT") nextDirection = "LEFT";
-            else if (key === 38 && direction !== "DOWN") nextDirection = "UP";
-            else if (key === 39 && direction !== "LEFT") nextDirection = "RIGHT";
-            else if (key === 40 && direction !== "UP") nextDirection = "DOWN";
+        function changeDirection(newDirection) {
+            if (newDirection === "LEFT" && direction !== "RIGHT") nextDirection = "LEFT";
+            if (newDirection === "RIGHT" && direction !== "LEFT") nextDirection = "RIGHT";
+            if (newDirection === "UP" && direction !== "DOWN") nextDirection = "UP";
+            if (newDirection === "DOWN" && direction !== "UP") nextDirection = "DOWN";
         }
 
         function spawnFood() {
@@ -63,7 +122,7 @@
                 ctx.fillRect(segment.x, segment.y, boxSize, boxSize);
             });
 
-            direction = nextDirection; // Aktualisiere Richtung erst am Anfang jedes Frames
+            direction = nextDirection;
 
             let head = { x: snake[0].x, y: snake[0].y };
 
@@ -72,13 +131,11 @@
             if (direction === "UP") head.y -= boxSize;
             if (direction === "DOWN") head.y += boxSize;
 
-            // **Teleport durch Wände**
             if (head.x < 0) head.x = canvas.width - boxSize;
             if (head.x >= canvas.width) head.x = 0;
             if (head.y < 0) head.y = canvas.height - boxSize;
             if (head.y >= canvas.height) head.y = 0;
 
-            // **Erst prüfen, wenn der Kopf sich bewegt hat**
             if (snake.some((segment, index) => index !== 0 && segment.x === head.x && segment.y === head.y)) {
                 alert("Game Over! Score: " + score);
                 snake = [{ x: 200, y: 200 }];
