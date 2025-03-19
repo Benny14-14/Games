@@ -1,3 +1,20 @@
+document.addEventListener("keydown", function(event) {
+    switch(event.key) {
+        case "ArrowUp":
+            if (direction !== "DOWN") direction = "UP";
+            break;
+        case "ArrowDown":
+            if (direction !== "UP") direction = "DOWN";
+            break;
+        case "ArrowLeft":
+            if (direction !== "RIGHT") direction = "LEFT";
+            break;
+        case "ArrowRight":
+            if (direction !== "LEFT") direction = "RIGHT";
+            break;
+    }
+});
+
 document.addEventListener("keydown", event => {
     const keyMap = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right" };
     if (keyMap[event.key]) changeDirection(keyMap[event.key]);
