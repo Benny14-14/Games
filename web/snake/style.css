@@ -1,0 +1,65 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+}
+
+canvas {
+    background-color: #222;
+    display: block;
+    margin: 20px auto;
+    border: 1px solid white;
+}
+
+.score-container {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.controls {
+    position: fixed;
+    bottom: 20px;
+    display: grid;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px;
+    gap: 5px;
+}
+
+.controls.left { left: 20px; }
+.controls.right { right: 20px; }
+
+.btn {
+    width: 50px;
+    height: 50px;
+    background-color: gray;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn:active { background-color: darkgray; }
+
+.btn-up { grid-column: 2; grid-row: 1; }
+.btn-left { grid-column: 1; grid-row: 2; }
+.btn-right { grid-column: 3; grid-row: 2; }
+.btn-down { grid-column: 2; grid-row: 2; }
+
+.return-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background: linear-gradient(25deg, #7758B3, #8A5A83);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(136, 0, 255, 0.7);
+}
+
+.return-btn:hover { background: linear-gradient(45deg, #00bfff, #0047ab); }
