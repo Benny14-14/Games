@@ -101,3 +101,19 @@ canvas {
     margin-bottom: 10px;
     transform: rotate(90deg); /* Dreht den Text zurück */
 }
+
+.score-container {
+    position: absolute;
+    left: 20px;
+    top: 20%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
