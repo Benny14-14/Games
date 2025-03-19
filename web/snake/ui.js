@@ -28,12 +28,3 @@ function drawGame() {
     drawFood();
     drawSnake();
 }
-
-function updateScore() {
-    document.getElementById("score").textContent = score;
-    if (score > highscore) {
-        highscore = score;
-        localStorage.setItem("highscore", highscore);
-        document.getElementById("highscore").textContent = highscore;
-    }
-}
