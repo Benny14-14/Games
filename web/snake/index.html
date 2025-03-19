@@ -16,17 +16,25 @@
             background-color: #222;
             display: block;
             margin: 20px auto;
+            border: 1px solid white;
         }
 
         /* Steuerungsbuttons */
         .controls {
             position: fixed;
             bottom: 20px;
-            right: 20px;
             display: grid;
             grid-template-columns: 50px 50px 50px;
             grid-template-rows: 50px 50px;
             gap: 5px;
+        }
+
+        .controls.left {
+            left: 20px;
+        }
+
+        .controls.right {
+            right: 20px;
         }
 
         .btn {
@@ -44,7 +52,6 @@
             background-color: darkgray;
         }
 
-        /* Button-Anordnung */
         .btn-up {
             grid-column: 2;
             grid-row: 1;
@@ -91,8 +98,16 @@
     <h1>Snake Game</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
-    <!-- Steuerung -->
-    <div class="controls">
+    <!-- Steuerung links -->
+    <div class="controls left">
+        <button class="btn btn-up" onclick="changeDirection('up')">⬆️</button>
+        <button class="btn btn-left" onclick="changeDirection('left')">⬅️</button>
+        <button class="btn btn-right" onclick="changeDirection('right')">➡️</button>
+        <button class="btn btn-down" onclick="changeDirection('down')">⬇️</button>
+    </div>
+
+    <!-- Steuerung rechts -->
+    <div class="controls right">
         <button class="btn btn-up" onclick="changeDirection('up')">⬆️</button>
         <button class="btn btn-left" onclick="changeDirection('left')">⬅️</button>
         <button class="btn btn-right" onclick="changeDirection('right')">➡️</button>
@@ -112,9 +127,19 @@
         let gridSize = 20;
         let gameSpeed = 150;
 
+        function drawGrid() {
+            ctx.strokeStyle = "#444";
+            for (let i = 0; i < canvas.width / gridSize; i++) {
+                for (let j = 0; j < canvas.height / gridSize; j++) {
+                    ctx.strokeRect(i * gridSize, j * gridSize, gridSize, gridSize);
+                }
+            }
+        }
+
         function draw() {
             ctx.fillStyle = "#222";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            drawGrid();
 
             // Essen zeichnen
             ctx.fillStyle = "red";
