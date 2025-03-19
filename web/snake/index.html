@@ -9,36 +9,18 @@
 <body>
 
     <h1>Snake Game</h1>
+
     <div class="score-container">
         <p>Score: <span id="score">0</span> | Highscore: <span id="highscore">0</span></p>
     </div>
+
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
-    <div class="controls left">
-        <button class="btn btn-up" onclick="changeDirection('up')">⬆️</button>
-        <button class="btn btn-left" onclick="changeDirection('left')">⬅️</button>
-        <button class="btn btn-right" onclick="changeDirection('right')">➡️</button>
-        <button class="btn btn-down" onclick="changeDirection('down')">⬇️</button>
+    <div class="slider-container">
+        <label for="speedSlider" id="speedLabel">Medium</label>
+        <input type="range" id="speedSlider" min="1" max="3" value="2" orient="vertical">
     </div>
 
-    <div class="controls right">
-        <button class="btn btn-up" onclick="changeDirection('up')">⬆️</button>
-        <button class="btn btn-left" onclick="changeDirection('left')">⬅️</button>
-        <button class="btn btn-right" onclick="changeDirection('right')">➡️</button>
-        <button class="btn btn-down" onclick="changeDirection('down')">⬇️</button>
-    </div>
-    
-<div class="score-container">
-    <p>Highscore: <span id="highscore">0</span></p>
-    <p>Score: <span id="score">0</span></p>
-</div>
-
-<div class="slider-container">
-    <label for="speedSlider" id="speedLabel">Medium</label>
-    <input type="range" id="speedSlider" min="1" max="3" value="2" orient="vertical">
-</div>
-
-    
     <button class="return-btn" onclick="window.history.back()">Return</button>
 
     <script src="gameLogic.js"></script>
