@@ -4,101 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: black;
-            color: white;
-        }
-
-        canvas {
-            background-color: #222;
-            display: block;
-            margin: 20px auto;
-            border: 1px solid white;
-        }
-
-        /* Steuerungsbuttons */
-        .controls {
-            position: fixed;
-            bottom: 20px;
-            display: grid;
-            grid-template-columns: 50px 50px 50px;
-            grid-template-rows: 50px 50px;
-            gap: 5px;
-        }
-
-        .controls.left {
-            left: 20px;
-        }
-
-        .controls.right {
-            right: 20px;
-        }
-
-        .btn {
-            width: 50px;
-            height: 50px;
-            background-color: gray;
-            color: white;
-            font-size: 20px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .btn:active {
-            background-color: darkgray;
-        }
-
-        .btn-up {
-            grid-column: 2;
-            grid-row: 1;
-        }
-
-        .btn-left {
-            grid-column: 1;
-            grid-row: 2;
-        }
-
-        .btn-right {
-            grid-column: 3;
-            grid-row: 2;
-        }
-
-        .btn-down {
-            grid-column: 2;
-            grid-row: 2;
-        }
-
-        /* Return Button */
-        .return-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 10px 20px;
-            background: linear-gradient(25deg, #7758B3, #8A5A83);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(136, 0, 255, 0.7);
-        }
-
-        .return-btn:hover {
-            background: linear-gradient(45deg, #00bfff, #0047ab);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <h1>Snake Game</h1>
+    <div class="score-container">
+        <p>Score: <span id="score">0</span> | Highscore: <span id="highscore">0</span></p>
+    </div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
-    <!-- Steuerung links -->
     <div class="controls left">
         <button class="btn btn-up" onclick="changeDirection('up')">⬆️</button>
         <button class="btn btn-left" onclick="changeDirection('left')">⬅️</button>
@@ -106,7 +21,6 @@
         <button class="btn btn-down" onclick="changeDirection('down')">⬇️</button>
     </div>
 
-    <!-- Steuerung rechts -->
     <div class="controls right">
         <button class="btn btn-up" onclick="changeDirection('up')">⬆️</button>
         <button class="btn btn-left" onclick="changeDirection('left')">⬅️</button>
@@ -114,109 +28,11 @@
         <button class="btn btn-down" onclick="changeDirection('down')">⬇️</button>
     </div>
 
-    <!-- Return Button -->
     <button class="return-btn" onclick="window.history.back()">Return</button>
 
-    <script>
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-
-        let snake = [{ x: 10, y: 10 }];
-        let direction = "right";
-        let food = { x: 15, y: 15 };
-        let gridSize = 20;
-        let gameSpeed = 150;
-
-        function drawGrid() {
-            ctx.strokeStyle = "#444";
-            for (let i = 0; i < canvas.width / gridSize; i++) {
-                for (let j = 0; j < canvas.height / gridSize; j++) {
-                    ctx.strokeRect(i * gridSize, j * gridSize, gridSize, gridSize);
-                }
-            }
-        }
-
-        function draw() {
-            ctx.fillStyle = "#222";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            drawGrid();
-
-            // Essen zeichnen
-            ctx.fillStyle = "red";
-            ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
-
-            // Schlange zeichnen
-            ctx.fillStyle = "lime";
-            snake.forEach((segment, index) => {
-                ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize);
-                ctx.strokeStyle = "black";
-                ctx.strokeRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize);
-            });
-        }
-
-        function update() {
-            let head = { ...snake[0] };
-
-            switch (direction) {
-                case "up": head.y--; break;
-                case "down": head.y++; break;
-                case "left": head.x--; break;
-                case "right": head.x++; break;
-            }
-
-            // Wände umgehen (Teleport)
-            if (head.x < 0) head.x = canvas.width / gridSize - 1;
-            if (head.x >= canvas.width / gridSize) head.x = 0;
-            if (head.y < 0) head.y = canvas.height / gridSize - 1;
-            if (head.y >= canvas.height / gridSize) head.y = 0;
-
-            // Kollision mit sich selbst
-            if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
-                resetGame();
-                return;
-            }
-
-            snake.unshift(head);
-
-            // Essen gefressen?
-            if (head.x === food.x && head.y === food.y) {
-                food = {
-                    x: Math.floor(Math.random() * (canvas.width / gridSize)),
-                    y: Math.floor(Math.random() * (canvas.height / gridSize))
-                };
-            } else {
-                snake.pop();
-            }
-
-            draw();
-        }
-
-        function resetGame() {
-            snake = [{ x: 10, y: 10 }];
-            direction = "right";
-            food = { x: 15, y: 15 };
-        }
-
-        function changeDirection(newDirection) {
-            if (
-                (newDirection === "up" && direction !== "down") ||
-                (newDirection === "down" && direction !== "up") ||
-                (newDirection === "left" && direction !== "right") ||
-                (newDirection === "right" && direction !== "left")
-            ) {
-                direction = newDirection;
-            }
-        }
-
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowUp") changeDirection("up");
-            if (event.key === "ArrowDown") changeDirection("down");
-            if (event.key === "ArrowLeft") changeDirection("left");
-            if (event.key === "ArrowRight") changeDirection("right");
-        });
-
-        setInterval(update, gameSpeed);
-    </script>
+    <script src="gameLogic.js"></script>
+    <script src="ui.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
