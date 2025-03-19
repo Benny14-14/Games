@@ -74,3 +74,6 @@ function eatApple() {
     score += 10; // Punkte für einen Apfel
     updateScore();
 }
+document.getElementById("speedSlider").addEventListener("input", function() {
+    document.getElementById("gameCanvas").focus(); // Fokus zurück auf das Spiel setzen
+});
