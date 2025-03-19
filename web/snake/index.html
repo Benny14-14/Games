@@ -58,7 +58,7 @@
             ctx.fillRect(food.x, food.y, boxSize, boxSize);
 
             ctx.fillStyle = "lime";
-            snake.forEach((segment, index) => {
+            snake.forEach(segment => {
                 ctx.fillRect(segment.x, segment.y, boxSize, boxSize);
             });
 
@@ -69,6 +69,12 @@
             if (direction === "UP") head.y -= boxSize;
             if (direction === "DOWN") head.y += boxSize;
 
+            // **Teleport durch die Wände**
+            if (head.x < 0) head.x = canvas.width - boxSize; // Links raus → Rechts rein
+            if (head.x >= canvas.width) head.x = 0; // Rechts raus → Links rein
+            if (head.y < 0) head.y = canvas.height - boxSize; // Oben raus → Unten rein
+            if (head.y >= canvas.height) head.y = 0; // Unten raus → Oben rein
+
             if (head.x === food.x && head.y === food.y) {
                 food = spawnFood();
                 score++;
@@ -76,11 +82,7 @@
                 snake.pop();
             }
 
-            if (
-                head.x < 0 || head.x >= canvas.width ||
-                head.y < 0 || head.y >= canvas.height ||
-                snake.some(segment => segment.x === head.x && segment.y === head.y)
-            ) {
+            if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
                 alert("Game Over! Score: " + score);
                 snake = [{ x: 200, y: 200 }];
                 direction = "RIGHT";
@@ -91,7 +93,7 @@
             snake.unshift(head);
         }
 
-        setInterval(draw, 100);
+        setInterval(draw, 150); // **Langsamere Geschwindigkeit**
     </script>
 </body>
 </html>
