@@ -1,1 +1,50 @@
-<iframe class="player" width="1280" height="720" src="http://play.culturepub.fr/play/player?player=7&pod=215757&widgetId=cbnews_social" frameborder=0 seamless allowfullscreen ></iframe>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 not found</title>
+    <link rel="stylesheet" href="https://benny14-14.github.io/Games/404style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Error Page</h1>
+        
+        <div class="buttons">
+            <a href="javascript:history.back()" class="btn">Return</a>
+            <a href="https://benny14-14.github.io/Games/" class="btn">Games</a>
+        </div>
+
+        <div class="video-container">
+            <iframe class="player" width="1280" height="720" src="http://play.culturepub.fr/play/player?player=7&pod=215757&widgetId=cbnews_social" frameborder=0 seamless allowfullscreen ></iframe>
+
+        </div>       
+    </div>
+
+    <script>
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-video', {
+                events: {
+                    'onStateChange': function(event) {
+                        // Wenn das Video endet, leite zur Games-Seite weiter
+                        if (event.data === YT.PlayerState.ENDED) {
+                            window.location.href = "https://benny14-14.github.io/Games/";
+                        }
+                        // Wenn das Video pausiert wird, spiele es sofort weiter
+                        if (event.data === YT.PlayerState.PAUSED) {
+                            player.playVideo();
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+    <!-- Lade die YouTube API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+</body>
+</html>
