@@ -7,7 +7,6 @@ const piecesEl = document.getElementById("pieces");
 const scoreEl = document.getElementById("score");
 const restartBtn = document.getElementById("restart");
 
-// --- Spielfeld initialisieren ---
 function createGrid() {
   grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
   gridEl.innerHTML = "";
@@ -19,18 +18,14 @@ function createGrid() {
 }
 createGrid();
 
-// --- Blöcke generieren ---
 const shapes = [
-  [[1]], // 1x1
-  [[1, 1]], // 1x2
-  [[1], [1]], // 2x1
-  [[1, 1], [1, 1]], // Quadrat
-  [[1, 1, 1]], // 1x3
-  [[1], [1], [1]], // 3x1
-  [[1, 1, 1], [0, 1, 0]], // T
-  [[1, 0], [1, 1]], // L
-  [[0, 1], [1, 1]] // umgedrehtes L
+  [[1]], [[1, 1]], [[1],[1]], [[1,1],[1,1]], 
+  [[1,1,1]], [[1],[1],[1]], [[1,1,1],[0,1,0]],
+  [[1,0],[1,1]], [[0,1],[1,1]]
 ];
+
+let draggedPiece = null;
+let offsetX = 0, offsetY = 0;
 
 function generatePieces() {
   piecesEl.innerHTML = "";
@@ -39,6 +34,7 @@ function generatePieces() {
     const piece = document.createElement("div");
     piece.classList.add("piece");
     piece.style.gridTemplateColumns = `repeat(${shape[0].length}, 30px)`;
+
     shape.forEach(row => {
       row.forEach(cell => {
         const cellEl = document.createElement("div");
@@ -46,43 +42,79 @@ function generatePieces() {
         piece.appendChild(cellEl);
       });
     });
+
     piece.dataset.shape = JSON.stringify(shape);
-    piece.draggable = true;
-    piece.addEventListener("dragstart", dragStart);
+
+    // eigenes Drag
+    piece.addEventListener("mousedown", startDrag);
+    piece.addEventListener("touchstart", startDrag);
+
     piecesEl.appendChild(piece);
   }
 }
 
-// --- Drag & Drop ---
-let draggedShape = null;
+function startDrag(e) {
+  e.preventDefault();
+  const piece = e.currentTarget;
+  draggedPiece = piece.cloneNode(true);
+  draggedPiece.style.position = "absolute";
+  draggedPiece.style.pointerEvents = "none";
+  draggedPiece.style.opacity = "0.8";
+  document.body.appendChild(draggedPiece);
 
-function dragStart(e) {
-  draggedShape = JSON.parse(e.target.dataset.shape);
+  const rect = piece.getBoundingClientRect();
+  offsetX = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+  offsetY = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+
+  moveDrag(e);
+  document.addEventListener("mousemove", moveDrag);
+  document.addEventListener("mouseup", endDrag);
+  document.addEventListener("touchmove", moveDrag, { passive: false });
+  document.addEventListener("touchend", endDrag);
 }
 
-// --- Drop auf Grid ---
-gridEl.addEventListener("dragover", e => e.preventDefault());
+function moveDrag(e) {
+  if (!draggedPiece) return;
+  const x = e.touches ? e.touches[0].clientX : e.clientX;
+  const y = e.touches ? e.touches[0].clientY : e.clientY;
+  draggedPiece.style.left = (x - offsetX) + "px";
+  draggedPiece.style.top = (y - offsetY) + "px";
+}
 
-gridEl.addEventListener("drop", e => {
+function endDrag(e) {
+  if (!draggedPiece) return;
+  const shape = JSON.parse(draggedPiece.dataset.shape);
   const rect = gridEl.getBoundingClientRect();
-  const x = Math.floor((e.clientX - rect.left) / 42);
-  const y = Math.floor((e.clientY - rect.top) / 42);
+  const x = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+  const y = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
 
-  if (placeShape(draggedShape, x, y)) {
+  const gridX = Math.floor((x - rect.left) / 42);
+  const gridY = Math.floor((y - rect.top) / 42);
+
+  if (placeShape(shape, gridX, gridY)) {
     updateGrid();
     clearLines();
     generatePieces();
   }
-});
+
+  document.body.removeChild(draggedPiece);
+  draggedPiece = null;
+
+  document.removeEventListener("mousemove", moveDrag);
+  document.removeEventListener("mouseup", endDrag);
+  document.removeEventListener("touchmove", moveDrag);
+  document.removeEventListener("touchend", endDrag);
+}
 
 function placeShape(shape, x, y) {
-  // passt es ins Grid?
   for (let r = 0; r < shape.length; r++) {
     for (let c = 0; c < shape[r].length; c++) {
       if (shape[r][c]) {
         if (
           x + c >= gridSize ||
           y + r >= gridSize ||
+          x + c < 0 ||
+          y + r < 0 ||
           grid[y + r][x + c] === 1
         ) {
           return false;
@@ -90,7 +122,6 @@ function placeShape(shape, x, y) {
       }
     }
   }
-  // setzen
   for (let r = 0; r < shape.length; r++) {
     for (let c = 0; c < shape[r].length; c++) {
       if (shape[r][c]) grid[y + r][x + c] = 1;
@@ -100,7 +131,6 @@ function placeShape(shape, x, y) {
   return true;
 }
 
-// --- Grid rendern ---
 function updateGrid() {
   const cells = gridEl.querySelectorAll(".cell");
   grid.flat().forEach((val, i) => {
@@ -109,17 +139,14 @@ function updateGrid() {
   scoreEl.textContent = "Score: " + score;
 }
 
-// --- Reihen/Spalten löschen ---
 function clearLines() {
   let cleared = 0;
-  // Reihen
   for (let r = 0; r < gridSize; r++) {
     if (grid[r].every(c => c === 1)) {
       grid[r] = Array(gridSize).fill(0);
       cleared++;
     }
   }
-  // Spalten
   for (let c = 0; c < gridSize; c++) {
     if (grid.every(row => row[c] === 1)) {
       for (let r = 0; r < gridSize; r++) grid[r][c] = 0;
@@ -132,7 +159,6 @@ function clearLines() {
   }
 }
 
-// --- Restart ---
 restartBtn.addEventListener("click", () => {
   score = 0;
   createGrid();
