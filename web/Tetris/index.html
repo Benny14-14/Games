@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tetris — Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>Tetris</h1>
+
+    <section class="game">
+      <canvas id="playfield" width="300" height="600" aria-label="Tetris Spielbereich"></canvas>
+
+      <aside class="sidebar">
+        <div class="panel">
+          <div>Score</div>
+          <div id="score">0</div>
+        </div>
+        <div class="panel">
+          <div>Level</div>
+          <div id="level">1</div>
+        </div>
+        <div class="panel">
+          <div>Lines</div>
+          <div id="lines">0</div>
+        </div>
+
+        <div class="panel next">
+          <div>Nächste</div>
+          <canvas id="next" width="120" height="120" aria-label="Nächstes Tetromino"></canvas>
+        </div>
+
+        <div class="controls">
+          <div><strong>Steuerung</strong></div>
+          <div>← → : bewegen</div>
+          <div>↑ : rotieren</div>
+          <div>↓ : soft drop</div>
+          <div>Space : hard drop</div>
+          <div>P : Pause</div>
+        </div>
+
+        <button id="restart">Neu starten</button>
+      </aside>
+    </section>
+
+    <p class="hint">Tipp: Versuche, Reihen vollständig zu füllen — mehr Reihen = mehr Punkte!</p>
+
+    <footer>
+      <small>Einfaches Tetris — lokal im Browser</small>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
