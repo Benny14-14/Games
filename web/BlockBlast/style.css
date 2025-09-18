@@ -1,0 +1,86 @@
+:root{
+  --bg:#0b1020;
+  --panel:#0f1724;
+  --accent:#ff4d4d;
+  --muted:#98a0b3;
+  --glass: rgba(255,255,255,0.03);
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{
+  height:100%;
+  margin:0;
+  font-family:var(--font-sans);
+  background: radial-gradient(circle at 10% 10%, #081226 0%, var(--bg) 60%);
+  color:#e6eef8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 20px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.topbar h1{margin:0;font-size:20px;letter-spacing:0.5px}
+.topbar .info{display:flex;gap:16px;font-size:14px;color:var(--muted);align-items:center}
+
+.game-wrap{
+  display:flex;
+  gap:16px;
+  padding:18px;
+  align-items:flex-start;
+  max-width:1100px;
+  margin:18px auto;
+}
+
+canvas{
+  border-radius:8px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  flex:1 1 auto;
+  max-width:100%;
+  height:auto;
+  touch-action: none; /* important for touch drag */
+}
+
+.controls{
+  width:240px;
+  background:var(--panel);
+  padding:12px;
+  border-radius:8px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+.controls button{
+  width:100%;
+  padding:10px 12px;
+  margin-bottom:8px;
+  border-radius:6px;
+  border:0;
+  background:linear-gradient(180deg,var(--accent), #d33a3a);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+.controls #pauseBtn{background:linear-gradient(180deg,#2f3b58,#24304a)}
+.controls .hint{color:var(--muted);font-size:13px;margin-bottom:10px}
+.legend{margin-top:8px;color:var(--muted);font-size:14px}
+.legend ul{padding-left:18px;margin:6px 0}
+.p-icon{
+  display:inline-block;
+  width:18px;height:18px;border-radius:4px;text-align:center;line-height:18px;
+  margin-right:8px;background:linear-gradient(180deg,#1b2f4a,#153053);color:#fff;font-size:12px;
+}
+
+.footer{text-align:center;color:var(--muted);padding:10px;font-size:12px}
+
+/* responsive */
+@media (max-width:900px){
+  .game-wrap{flex-direction:column;align-items:center}
+  .controls{width:94%}
+}
