@@ -4,7 +4,7 @@
   const COLS = 10;
   const ROWS = 20;
   const BLOCK = 30; // Pixelgröße je Zelle
-  const LINES_PER_LEVEL = 10;
+  const LINES_PER_LEVEL = 8;
   const POINTS = { single: 40, double: 100, triple: 300, tetris: 1200 };
 
   // Canvas + Kontext
