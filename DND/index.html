@@ -10,6 +10,7 @@
   <div class="container">
     <h1>⚔️ Lurola D&D Portal</h1>
 
+    <!-- Login & Registrierung -->
     <div id="auth-section">
       <h2>Login</h2>
       <input type="text" id="login-email" placeholder="E-Mail">
@@ -23,9 +24,31 @@
       <button id="register-btn">Registrieren</button>
     </div>
 
+    <!-- Benutzerbereich -->
     <div id="user-section" style="display:none;">
       <h2>Willkommen, <span id="display-username"></span>!</h2>
       <button id="logout-btn">Logout</button>
+
+      <hr>
+
+      <!-- Spielverwaltung -->
+      <div id="game-section">
+        <h2>Spiel erstellen</h2>
+        <input type="text" id="game-name" placeholder="Spielname">
+        <button id="create-game-btn">Spiel erstellen</button>
+
+        <h2>Einem Spiel beitreten</h2>
+        <input type="text" id="join-code" placeholder="Beitrittscode">
+        <button id="join-game-btn">Beitreten</button>
+      </div>
+
+      <hr>
+
+      <!-- Liste der Spiele -->
+      <div id="my-games">
+        <h2>Meine Spiele</h2>
+        <ul id="games-list"></ul>
+      </div>
     </div>
   </div>
 
