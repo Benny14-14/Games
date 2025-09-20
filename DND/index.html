@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lurola D&D</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>⚔️ Lurola D&D Portal</h1>
+
+    <div id="auth-section">
+      <h2>Login</h2>
+      <input type="text" id="login-email" placeholder="E-Mail">
+      <input type="password" id="login-password" placeholder="Passwort">
+      <button id="login-btn">Einloggen</button>
+
+      <h2>Registrieren</h2>
+      <input type="text" id="register-username" placeholder="Benutzername">
+      <input type="text" id="register-email" placeholder="E-Mail">
+      <input type="password" id="register-password" placeholder="Passwort">
+      <button id="register-btn">Registrieren</button>
+    </div>
+
+    <div id="user-section" style="display:none;">
+      <h2>Willkommen, <span id="display-username"></span>!</h2>
+      <button id="logout-btn">Logout</button>
+    </div>
+  </div>
+
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
