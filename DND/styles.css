@@ -1,0 +1,37 @@
+:root{
+  --bg:#f7ede0;
+  --card:#fff6ee;
+  --accent:#d97706;
+  --dark:#2b2b2b;
+  --panel:#fff8f0;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#efe7de,#f5efe6);color:var(--dark)}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(0,0,0,0.03);border-bottom:4px solid var(--accent)}
+.topbar h1{margin:0}
+.main{padding:20px}
+.card{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.06);margin:16px}
+.hidden{display:none}
+.col-2{display:flex;gap:12px}
+.row{display:flex;gap:8px}
+.space-between{display:flex;justify-content:space-between;align-items:center}
+.panel{background:var(--panel);padding:12px;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,0.06)}
+.game-grid{display:grid;grid-template-columns:260px 1fr 260px;gap:12px;align-items:start;margin-top:12px}
+.list{max-height:300px;overflow:auto}
+.input, input, textarea{width:100%;padding:8px;border-radius:6px;border:1px solid #e6d7c6;margin:6px 0;background:white}
+button{background:var(--accent);color:white;border:none;padding:8px;border-radius:6px;cursor:pointer}
+button:hover{opacity:0.95}
+.muted{color:#6b7280}
+.map-panel{min-height:520px;display:flex;flex-direction:column}
+#map-wrapper{position:relative;flex:1;background:#ddd;border-radius:6px;overflow:hidden}
+#map-image{position:absolute;left:0;top:0;transform-origin:0 0;user-select:none;pointer-events:none;max-width:none}
+#tokens-layer{position:absolute;left:0;top:0;pointer-events:none}
+.token{position:absolute;width:48px;height:48px;border-radius:8px;overflow:hidden;border:2px solid white;box-shadow:0 6px 12px rgba(0,0,0,0.25);cursor:pointer;pointer-events:auto}
+.avatar{width:80px;height:80px;border-radius:8px;object-fit:cover}
+.chat-window{height:160px;overflow:auto;background:#fff;padding:8px;border-radius:6px;border:1px solid #e8d8d0}
+.chat-input{display:flex;gap:6px;margin-top:8px}
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45)}
+.modal-body{background:white;padding:18px;border-radius:10px;min-width:320px}
+.dice{padding:6px 10px;border-radius:6px;background:#fff;border:1px solid #ddd;cursor:pointer}
+.map-toolbar{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.map-footer{margin-top:6px}
