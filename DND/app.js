@@ -150,7 +150,42 @@ async function loadUserGames(userId) {
       const li = document.createElement("li");
       const game = gameSnap.data();
       li.textContent = `${game.name} (Code: ${game.joinCode})`;
+      li.addEventListener("click", () => openCharacterEditor(gameId));
       gamesList.appendChild(li);
     }
   }
+}
+
+// --- Charaktereditor öffnen ---
+function openCharacterEditor(gameId) {
+  document.getElementById("character-section").style.display = "block";
+
+  document.getElementById("save-char-btn").onclick = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const charName = document.getElementById("char-name").value;
+    const hp = parseInt(document.getElementById("char-hp").value);
+    const mana = parseInt(document.getElementById("char-mana").value);
+    const charClass = document.getElementById("char-class").value;
+
+    const charData = {
+      charName,
+      hp,
+      mana,
+      class: charClass
+    };
+
+    await setDoc(
+      doc(db, "games", gameId, "players", user.uid),
+      charData
+    );
+
+    document.getElementById("char-display").innerHTML = `
+      <p><strong>Name:</strong> ${charName}</p>
+      <p><strong>HP:</strong> ${hp}</p>
+      <p><strong>Mana:</strong> ${mana}</p>
+      <p><strong>Klasse:</strong> ${charClass}</p>
+    `;
+  };
 }
