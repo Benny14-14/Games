@@ -1,70 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lurola D&D</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lurola DnD — Session Hub</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>⚔️ Lurola D&D Portal</h1>
+  <header class="topbar">
+    <h1>Lurola DnD</h1>
+    <div id="top-actions"></div>
+  </header>
 
-    <!-- Login & Registrierung -->
-    <div id="auth-section">
-      <h2>Login</h2>
-      <input type="text" id="login-email" placeholder="E-Mail">
-      <input type="password" id="login-password" placeholder="Passwort">
-      <button id="login-btn">Einloggen</button>
+  <main id="app">
+    <!-- AUTH -->
+    <section id="auth" class="card">
+      <h2>Login / Registrieren</h2>
+      <div class="col-2">
+        <div>
+          <h3>Login</h3>
+          <input id="login-identifier" placeholder="E-Mail oder Benutzername" />
+          <input id="login-password" type="password" placeholder="Passwort" />
+          <button id="btn-login">Login</button>
+        </div>
+        <div>
+          <h3>Registrieren</h3>
+          <input id="reg-username" placeholder="Benutzername (optional)" />
+          <input id="reg-email" placeholder="E-Mail (optional)" />
+          <input id="reg-password" type="password" placeholder="Passwort" />
+          <button id="btn-register">Registrieren</button>
+        </div>
+      </div>
+      <p id="auth-msg" class="muted"></p>
+    </section>
 
-      <h2>Registrieren</h2>
-      <input type="text" id="register-username" placeholder="Benutzername">
-      <input type="text" id="register-email" placeholder="E-Mail">
-      <input type="password" id="register-password" placeholder="Passwort">
-      <button id="register-btn">Registrieren</button>
-    </div>
-
-    <!-- Benutzerbereich -->
-    <div id="user-section" style="display:none;">
-      <h2>Willkommen, <span id="display-username"></span>!</h2>
-      <button id="logout-btn">Logout</button>
-
-      <hr>
-
-      <!-- Spielverwaltung -->
-      <div id="game-section">
-        <h2>Spiel erstellen</h2>
-        <input type="text" id="game-name" placeholder="Spielname">
-        <button id="create-game-btn">Spiel erstellen</button>
-
-        <h2>Einem Spiel beitreten</h2>
-        <input type="text" id="join-code" placeholder="Beitrittscode">
-        <button id="join-game-btn">Beitreten</button>
+    <!-- LOBBY -->
+    <section id="lobby" class="card hidden">
+      <div class="row space-between">
+        <h2>Lobby</h2>
+        <div id="user-info"></div>
       </div>
 
-      <hr>
+      <div class="col-2">
+        <div>
+          <h3>Neues Spiel erstellen</h3>
+          <input id="new-game-name" placeholder="Spielname" />
+          <input id="new-game-map" placeholder="Map Bild URL (optional)" />
+          <textarea id="new-game-desc" placeholder="Beschreibung (optional)"></textarea>
+          <label>Default Stats (Komma-getrennt)</label>
+          <input id="new-game-stats" placeholder="HP,Mana,STR,DEX" />
+          <label>Standard-Klassen JSON</label>
+          <textarea id="new-game-classes" placeholder='[{"name":"Krieger","limit":1},{"name":"Magier","limit":0}]'></textarea>
+          <label>Klassen einzigartig? <select id="new-game-class-unique"><option value="false">nein</option><option value="true">ja</option></select></label>
+          <button id="btn-create-game">Spiel erstellen</button>
+        </div>
 
-      <!-- Liste der Spiele -->
-      <div id="my-games">
-        <h2>Meine Spiele</h2>
-        <ul id="games-list"></ul>
+        <div>
+          <h3>Spiel beitreten</h3>
+          <input id="join-code" placeholder="Beitrittscode" />
+          <button id="btn-join-code">Beitreten</button>
+
+          <h3>Einladungen / Offene Spiele</h3>
+          <div id="open-games"></div>
+        </div>
       </div>
 
-      <hr>
+      <h3>Deine Spiele</h3>
+      <div id="games-list"></div>
+    </section>
 
-      <!-- Charakterverwaltung -->
-      <div id="character-section" style="display:none;">
-        <h2>Mein Charakter</h2>
-        <input type="text" id="char-name" placeholder="Charaktername">
-        <input type="number" id="char-hp" placeholder="HP">
-        <input type="number" id="char-mana" placeholder="Mana">
-        <input type="text" id="char-class" placeholder="Klasse">
-        <button id="save-char-btn">Charakter speichern</button>
-
-        <div id="char-display"></div>
+    <!-- GAME VIEW -->
+    <section id="game-view" class="hidden">
+      <div class="row space-between">
+        <h2 id="game-title">Spiel</h2>
+        <div>
+          <span id="game-code" class="muted"></span>
+          <button id="leave-game">Spiel verlassen</button>
+        </div>
       </div>
-    </div>
-  </div>
+
+      <div class="game-grid">
+        <!-- left: players & chat -->
+        <aside class="panel">
+          <h4>Spieler</h4>
+          <div id="players-list" class="list"></div>
+
+          <h4>Chat</h4>
+          <div id="chat-window" class="chat-window"></div>
+          <div class="chat-input">
+            <input id="chat-text" placeholder="Nachricht..." />
+            <button id="btn-send-chat">Senden</button>
+          </div>
+
+          <h4>Musik (global)</h4>
+          <div id="music-list"></div>
+          <div class="row">
+            <button id="music-prev">◀</button>
+            <button id="music-toggle">Play/Pause</button>
+            <button id="music-next">▶</button>
+          </div>
+        </aside>
+
+        <!-- center: map -->
+        <div class="panel map-panel">
+          <div class="map-toolbar">
+            <button id="zoom-in">+</button>
+            <button id="zoom-out">-</button>
+            <button id="map-reset">Reset</button>
+            <label><input id="toggle-token-drag" type="checkbox" /> GM-Drag</label>
+          </div>
+          <div id="map-wrapper">
+            <img id="map-image" src="" alt="Map" />
+            <div id="tokens-layer"></div>
+          </div>
+
+          <div class="map-footer">
+            <label>Map hochladen (GM): <input id="map-upload" type="file" accept="image/*" /></label>
+            <label>Audio Track URL hinzufügen: <input id="music-url" placeholder="raw GitHub / direct mp3 URL" /></label>
+            <button id="btn-add-music">Hinzufügen</button>
+            <h4>Würfel</h4>
+            <div id="dice-panel">
+              <button class="dice" data-d="20">W20</button>
+              <button class="dice" data-d="12">W12</button>
+              <button class="dice" data-d="10">W10</button>
+              <button class="dice" data-d="6">W6</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- right: char / gm -->
+        <aside class="panel">
+          <div id="char-card">
+            <img id="my-avatar" class="avatar" src="" alt="Avatar" />
+            <div><strong id="my-char-name"></strong></div>
+            <div id="my-stats"></div>
+            <button id="btn-edit-char">Char bearbeiten</button>
+            <input id="avatar-upload" type="file" accept="image/*" />
+          </div>
+
+          <div id="gm-controls" class="hidden">
+            <h4>GM Einstellungen</h4>
+            <label>Stats:</label>
+            <input id="gm-stats" />
+            <label>Allow assign?</label>
+            <select id="gm-allow-assign"><option value="true">Ja</option><option value="false">Nein</option></select>
+            <label>Klassen (JSON)</label>
+            <textarea id="gm-classes"></textarea>
+            <label>Klassen einzigartig?</label>
+            <select id="gm-class-unique"><option value="false">nein</option><option value="true">ja</option></select>
+            <label>Währung (Name, leer = aus)</label>
+            <input id="gm-currency" />
+            <button id="btn-save-gm">Speichern</button>
+          </div>
+
+        </aside>
+      </div>
+
+      <!-- Char Edit Modal -->
+      <div id="char-modal" class="modal hidden">
+        <div class="modal-body">
+          <h3>Charakter bearbeiten</h3>
+          <input id="char-name" placeholder="Charaktername" />
+          <input id="char-class" placeholder="Klasse" />
+          <div id="dyn-stats"></div>
+          <button id="btn-save-char">Speichern</button>
+          <button id="btn-close-char">Schließen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin -->
+    <section id="admin" class="card hidden">
+      <h2>Admin Panel</h2>
+      <div id="admin-contents"></div>
+    </section>
+
+  </main>
+
+  <audio id="global-audio" crossorigin="anonymous"></audio>
 
   <script type="module" src="firebase-config.js"></script>
   <script type="module" src="app.js"></script>
